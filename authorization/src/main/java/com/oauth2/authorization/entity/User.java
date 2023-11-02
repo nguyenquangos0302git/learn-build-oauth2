@@ -1,8 +1,11 @@
-package com.authorizationserver.authorization.entity;
+package com.oauth2.authorization.entity;
 
 import lombok.Data;
 
-import jakarta.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -15,9 +18,9 @@ public class User {
     private String lastName;
     private String email;
 
-    @Column(length = 60)
     private String password;
 
     private String role;
     private boolean enabled = false;
+
 }

@@ -8,13 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="authorization" />
-        <module name="demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="authorization" target="17" />
       <module name="demo" target="17" />
       <module name="learn-build-oauth2" target="17" />
+      <module name="spring-security-tutorial" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

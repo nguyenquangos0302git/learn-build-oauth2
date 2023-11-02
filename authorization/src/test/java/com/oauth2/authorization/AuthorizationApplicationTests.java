@@ -1,4 +1,4 @@
-package com.authorizationserver.authorization;
+package com.oauth2.authorization;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
-package com.authorizationserver.authorization.service;
+package com.oauth2.authorization.service;
 
-import com.authorizationserver.authorization.entity.User;
-import com.authorizationserver.authorization.repository.UserRepository;
+import com.oauth2.authorization.entity.User;
+import com.oauth2.authorization.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,11 +13,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Service
+@Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -31,12 +33,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-        if (user == null)
-            throw new UsernameNotFoundException("No user found.");
+        if(user == null) {
+            throw  new UsernameNotFoundException("No User Found");
+        }
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                user.isEnabled(),
+                true,
                 true,
                 true,
                 true,
@@ -45,11 +48,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(List<String> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (String role : roles) {
+        List<GrantedAuthority>  authorities = new ArrayList<>();
+        for(String role: roles) {
             authorities.add(new SimpleGrantedAuthority(role));
         }
-
         return authorities;
     }
 }

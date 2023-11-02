@@ -1,7 +1,6 @@
-package com.authorizationserver.authorization.repository;
+package com.oauth2.authorization.repository;
 
-
-import com.authorizationserver.authorization.entity.User;
+import com.oauth2.authorization.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
